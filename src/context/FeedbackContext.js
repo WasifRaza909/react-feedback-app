@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState([]);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
@@ -15,6 +15,7 @@ export const FeedbackProvider = ({ children }) => {
   }, []);
 
   const fetchFeedback = async () => {
+    setIsLoading(true);
     const response = await fetch(`/feedback?_sort=id&_order=desc`);
     const data = await response.json();
 
